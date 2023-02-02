@@ -1,7 +1,7 @@
 <script setup>
-import "./style.css"
+import "./style.css";
 </script>
 
 <template>
- <h1 class="text-xl text-red-200">test</h1>
+  <h1 class="text-3xl font-bold underline">Hello world!</h1>
 </template>
