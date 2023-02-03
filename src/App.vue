@@ -3,58 +3,64 @@ import "./style.css";
 </script>
 
 <template>
-  <!-- <div class="flex justify-center items-center gap-5 mt-10">
-    <span class="w-44 h-44 border border-black rounded"></span
-    ><span class="w-44 h-44 border border-black rounded"></span
-    ><span class="w-44 h-44 border border-black rounded"></span
-    ><span class="w-44 h-44 border border-black rounded"></span>
-  </div> -->
-
-  <div class="flex justify-center items-center mt-4 mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <div
-        v-for="item in items"
-        @click="clickToFlip"
-        :class="(item.isFlip = !item.isFlip)"
-        class="card w-44 h-44 m-2 cursor-pointer border border-gray-400 rounded-lg"
-      ></div>
-    </div>
+  <div class="flex flex-row justify-center items-center gap-5 mt-10">
+    <img
+      @click="clickToFlip(index)"
+      v-for="(item, index) in items"
+      :src="item.isFlip ? item.iconSrc : cached"
+      class="w-44 h-44 border border-black rounded-xl"
+    />
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      classFlip:
-        "shadow-md border-opacity-0 transform -translate-y-1 transition-all duration-200",
+      cached:
+        "https://c8.alamy.com/comp/2ACPGGT/bunch-of-cards-flipped-2ACPGGT.jpg",
       items: [
         {
           mark: "first",
-          iconSrc: "",
+
+          iconSrc:
+            "https://media.istockphoto.com/id/1154859274/vector/signs-playing-cards-casino-isolated-signs-red-black-color-poker-signs.jpg?s=612x612&w=0&k=20&c=JJdoqUMNkiwmjR1pTi_c2g7OwYL255ux2EmdCjIlHRA=",
           isFlip: false,
         },
         {
           mark: "second",
-          iconSrc: "",
+          iconSrc:
+            "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
           isFlip: false,
         },
         {
           mark: "first",
-          iconSrc: "",
+          iconSrc:
+            "https://media.istockphoto.com/id/1154859274/vector/signs-playing-cards-casino-isolated-signs-red-black-color-poker-signs.jpg?s=612x612&w=0&k=20&c=JJdoqUMNkiwmjR1pTi_c2g7OwYL255ux2EmdCjIlHRA=",
           isFlip: false,
         },
         {
           mark: "second",
-          iconSrc: "",
+          iconSrc:
+            "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
           isFlip: false,
         },
       ],
     };
   },
   methods: {
-    clickToFlip() {
-      {
-        this.classFlip, (this.isFlip = true);
+    clickToFlip(index) {
+      if (!this.items[index].isFlip) {
+        this.items[index].isFlip = true;
+        let currentSrc = this.items[index].iconSrc;
+        for (let i = 0; i < this.items.length; i++) {
+          if (i !== index && this.items[i].isFlip) {
+            if (currentSrc === this.items[i].iconSrc) {
+              alert("matched");
+            } else {
+              this.items[i].isFlip = false;
+            }
+          }
+        }
       }
     },
   },
